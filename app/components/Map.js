@@ -1,8 +1,8 @@
-'use client'
+
+'use client';
+import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState, useEffect} from 'react';
-import L from 'leaflet';
 
 const markers = [
   { position: [28.6139, 77.209], label: "New Delhi" },
@@ -13,30 +13,29 @@ const markers = [
 ];
 
 const CenterMap = ({ position }) => {
-  const map = useMap(); // Access the Leaflet map instance
+  const map = useMap();
 
   useEffect(() => {
     if (position) {
-      map.setView(position, map.getZoom()); // Center the map to the new position
+      map.setView(position, map.getZoom());
     }
-  }, [position, map]); // Only re-run effect if position or map changes
+  }, [position, map]);
 
-  return null; // This component does not render anything to the DOM
+  return null;
 };
 
-
 const Map = () => {
-  const [center, setCenter] = useState([20.5937, 78.9629]); // Initial center
+  const [center, setCenter] = useState([20.5937, 78.9629]);
 
   return (
     <MapContainer center={center} zoom={5} style={{ height: "100vh", width: "100%" }}>
-    <TileLayer
-    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  />
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
       {markers.map((marker, index) => (
         <Marker
-          key={marker.position}
+          key={index}
           position={marker.position}
           eventHandlers={{
             click: () => {
