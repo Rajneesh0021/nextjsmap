@@ -36,7 +36,7 @@ const Map = () => {
   />
       {markers.map((marker, index) => (
         <Marker
-          
+          key={marker.position}
           position={marker.position}
           eventHandlers={{
             click: () => {
